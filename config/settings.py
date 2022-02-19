@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-=cn+a-%&5r^e8suzho3l4qfcr1=&j*9n4(w&@8+7h_n!us#+j-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [".herokuapp.com, 127.0.0.1, localhost"]
+ALLOWED_HOSTS = ["https://git.heroku.com/gentle-plateau-10761.git.herokuapp.com, 127.0.0.1, localhost"]
 
 
 # Application definition
