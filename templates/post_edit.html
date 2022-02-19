@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+<link href="css/base.css" rel="stylesheet">
+{% block title %}Edit Profile{% endblock title %}
+
+{% block content %}
+<h1>Edit Post</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-primary" value="Edit">
+</form>
+{% endblock content %}
