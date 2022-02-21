@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Post
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # Create your views here.
 
 
@@ -15,17 +16,25 @@ class PostDetailView(DetailView):
     template_name = "post_detail.html"
     model = Post
 
-class PostCreateView(CreateView):
+class PostCreateView( LoginRequiredMixin, CreateView):
     template_name = "post_new.html"
     model = Post 
     fields = ["title", "author", "body"]
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = "post_edit.html"
     model = Post
     fields = ["title", "author", "body"]
 
-class PostDeleteView(DeleteView):
+    def test_func(self):
+        obj = self.get_object()
+        return obj.author == self.request.user
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = "post_delete.html"
     model = Post
     success_url = reverse_lazy("post_list")
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.author == self.request.user
